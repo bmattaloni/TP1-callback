@@ -4,22 +4,6 @@
  * and open the template in the editor.
  *****************************************************************************/
 
-/******************************************************************************
- * 
- * @file    test.c
- * 
- * @brief   ;
- * 
- * @details ; 
- *
- * @author  Gino Minnucci                               <gminnucci@itba.edu.ar>
- * @author  
- * @author 
- * 
- * 
- * @copyright GNU General Public License v3
- *****************************************************************************/
-
 #ifndef TEST_H
 #    define TEST_H
 

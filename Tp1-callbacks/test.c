@@ -4,21 +4,6 @@
  * and open the template in the editor.
  *****************************************************************************/
 
-/******************************************************************************
- * 
- * @file    test.c
- * 
- * @brief   ;
- * 
- * @details ; 
- *
- * @author  Gino Minnucci                               <gminnucci@itba.edu.ar>
- * @author  
- * @author 
- * 
- * 
- * @copyright GNU General Public License v3
- *****************************************************************************/
 
 // === Libraries and header files ===
 #include <stdio.h>
@@ -53,11 +38,11 @@ test(void)
     char * p4 [] ={"a.out","epar",NULL};
     char * p5 [] ={"a.out","-hola","hol",NULL};
         
-    printf("OK, the answer should be 3: %d\n",parseCmdLine(6,p1,NULL));
-    printf("Error tipo 2 : %d\n",parseCmdLine(6,p2,NULL));
-    printf("Error tipo 1 : %d\n",parseCmdLine(5,p3,NULL));
-    printf("OK, the answer should be 1: %d\n",parseCmdLine(2,p4,NULL));
-    printf("OK, the answer should be 1: %d\n",parseCmdLine(3,p5,NULL));
+    printf("OK, the answer should be 3: %d\n",parseCmdLine(6,p1,NULL, NULL));
+    printf("Error tipo 2 : %d\n",parseCmdLine(6,p2,NULL, NULL));
+    printf("Error tipo 1 : %d\n",parseCmdLine(5,p3,NULL, NULL));
+    printf("OK, the answer should be 1: %d\n",parseCmdLine(2,p4,NULL, NULL));
+    printf("OK, the answer should be 1: %d\n",parseCmdLine(3,p5,NULL, NULL));
     
 }
 /// @privatesection

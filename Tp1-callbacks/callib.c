@@ -4,21 +4,7 @@
  * and open the template in the editor.
  *****************************************************************************/
 
-/******************************************************************************
- * 
- * @file    callib.c
- * 
- * @brief   ;
- * 
- * @details ; 
- *
- * @author  Gino Minnucci                               <gminnucci@itba.edu.ar>
- * @author  
- * @author 
- * 
- * 
- * @copyright GNU General Public License v3
- *****************************************************************************/
+
 
 // === Libraries and header files ===
 #include <stdio.h>
@@ -48,36 +34,57 @@
  Comentsrios espantosos
  Falta callback y agregar datos a memoria
  */
-int
-parseCmdLine(int argc, char *argv[], void *userData)
-{
-    int result=0, i;
 
+
+int parseCmdLine(int argc, char *argv[],pCallback (p), void *userData)
+{
+    int result=0, i,valid=1;
+    char *clave;
+    char *valor;
+    
     for(i = 1; i < argc; i++)
     {
-        if((*(argv[i]) == '-')&&(argv[i+1] == NULL))  //Error de tipo 1
-        {                                          //Encontro clave sin su valor
+        if((*(argv[i]) == '-')&&(*((argv[i])+1)== '\0'))  //Error de tipo 2
+        {                                          //Encontro opcion con clave vacia
             result=-EXIT_FAILURE;
             i=argc;
         }
-        else if((*(argv[i]) == '-')&&(*((argv[i])+1) == '\0')) //Error de tipo 2
-        {                                        //Encontro opcion sin su clave
+        else if((*(argv[i]) == '-')&&( argv[i+1] == NULL)) //Error de tipo 1
+        {                                        //Encontro opcion sin valor
             result=-EXIT_FAILURE;
             i=argc;
         }
         else if((*(argv[i]) == '-')&&(argv[i] != NULL)) //Encontro opcion
-        {
-            i++;        //Avanzo dos(este mas el del for())
+        {   
+            clave=argv[i++];                                //Avanzo dos(este mas el del for())
+            valor=argv[i];
+            
+            valid=p(clave+1,valor,((args_t*)userData)+result) ;   //llamo al callback y le paso el userdata donde guardar(a clave le sumo uno para que no pase el '-')
+               if (!valid){                                             //al user data le sumo result para que siempre guarde en la siguiente struct
+                   i=argc;
+                   result=-EXIT_FAILURE;
+                }                                               //si callback devuelve 0 hubo un error entonces corto
             result++;
         }
         else                                            //Encontro parametro
-        {
+        {   
+            valor=argv[i];
+            valid=p(NULL,valor,((args_t*)userData)+result);      //lo mismo que con opciones per aplicado a parametros
+            
+                if (!valid){
+                    i=argc;
+                    result=-EXIT_FAILURE;
+                }
+                  
             result++;
         }
     
     }
     return result;
 }
+
+
+
 
 /// @privatesection
 // === Local function definitions ===

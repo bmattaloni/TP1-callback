@@ -4,28 +4,14 @@
  * and open the template in the editor.
  *****************************************************************************/
 
-/******************************************************************************
- * 
- * @file    main.c
- * 
- * @brief   ;
- * 
- * @details ; 
- *
- * @author  Gino Minnucci                               <gminnucci@itba.edu.ar>
- * @author  
- * @author 
- * 
- * 
- * @copyright GNU General Public License v3
- *****************************************************************************/
-
 // === Libraries and header files ===
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "callib.h"
 #include "test.h"
+#include <string.h>
+
 
 /// @privatesection
 // === Constants and Macro definitions ===
@@ -49,10 +35,48 @@
 
 int
 main(int argc, char* argv [])
-{
+{   
+    args_t argStruc[argc];
+    
+    
+    int parseCmdLine(argc,argv,parseCallback,argStruc);
+    
     test();
 
     return (EXIT_SUCCESS);
+}
+
+int parseCallback(char *key,char* value,void *userData){
+    
+    args_t * argStruc= (args_t*) userData;            //casteo la struc donde debo guardar
+    int valid=1,num;
+    if(key==NULL){                                  // si fue parametro lo guardo 
+        
+        argStruc->key = value;
+        
+    }
+    else{
+        
+        if(!strcmp(key,"altura")){                  // si fue opcion verifico que sea la clave correcta
+            
+            argStruc->key=key;
+        }
+        else{
+            valid=0;                                // si no fue correcta devuelvo 0
+        }
+        
+        num=atoi(value);
+        
+        
+        if(num<300 && valid==1){                    // verifico que el valor sea el rango que espero,sino devuelvo 0
+            
+            argStruc->value=value;
+        }
+        else{
+            valid=0;
+        }
+    }
+    return valid;
 }
 
 /// @privatesection
