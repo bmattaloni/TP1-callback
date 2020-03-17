@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "callib.h"
-#include "test.h"
+//#include "test.h"
 #include <string.h>
 
 
@@ -36,12 +36,18 @@
 int
 main(int argc, char* argv [])
 {   
-    args_t argStruc[argc];
+    args_t argStruc[10];
+    int cantidad;
     
+    char *prueba[]={"hola","-altura","150"};
     
-    int parseCmdLine(argc,argv,parseCallback,argStruc);
+    cantidad=parseCmdLine(3,prueba,parseCallback,argStruc);
     
-    test();
+    //test();
+    printf("%d\n",cantidad);
+    
+    printf("%s\n",argStruc[0].key);
+    printf("%s",argStruc[0].value);
 
     return (EXIT_SUCCESS);
 }
@@ -76,6 +82,7 @@ int parseCallback(char *key,char* value,void *userData){
             valid=0;
         }
     }
+    printf("HECHO\n");
     return valid;
 }
 
