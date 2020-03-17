@@ -18,9 +18,6 @@
     <ClCompile Include="callib.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test.c">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -139,7 +139,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callib.c" />
-    <ClCompile Include="main.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
