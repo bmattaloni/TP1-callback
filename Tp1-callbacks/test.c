@@ -1,9 +1,10 @@
+
 // === Libraries and header files ===
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "callib.h"
 
+#include "callib.h"
+#include <string.h>
 
 
 /// @privatesection
@@ -16,7 +17,7 @@
 // === Function prototypes for private functions with file level scope ===
 
 int 
-parseCallback(char* key, char* value, void* userData);      //Prototipo de callback que guarda opciones y par�metros.
+parseCallback(char* key, char* value, void* userData);      //Prototipo de callback que guarda opciones y parametros.
 
 // === ROM Constant variables with file level scope ===
 
@@ -32,8 +33,7 @@ main(int argc, char* argv [])
     args_t argStruc[10];                                    //Define un arreglo de estructuras para guardar la data.
     int cantidad;
     
-    //define arreglos de pruebas
-    char * p1[] = { "/a.out","-","no","deberia","seguir" };  
+    char * p1[]={"/a.out","-","no","deberia","seguir"};      //creo ejemplos de datos para probar
     char * p2[]={ "/a.out","-altura",NULL};
     char * p3[]={"/a.out","-peso","120"};
     char * p4[]={"/a.out","pesaje","-peso","120"};
@@ -45,42 +45,44 @@ main(int argc, char* argv [])
     printf("TEST 1:error tipo 2\n");
     printf("Linea de comandos: %s  %s\n",p1[0],p1[1]);
     cantidad=parseCmdLine(2,p1,parseCallback,argStruc);
-    printf("\n\n");
+    printf("\n");
     
     //TEST 2:error tipo 1
     printf("TEST 2:error tipo 1\n");
     printf("Linea de comandos: %s  %s\n",p2[0],p2[1]);
     cantidad=parseCmdLine(2,p2,parseCallback,argStruc);
-    printf("\n\n");
+    printf("\n");
     
     //TEST 3:1 opcion
     printf("TEST 3:1 opcion\n");
     printf("Linea de comandos: %s  %s  %s\n",p3[0],p3[1],p3[2]);
     cantidad=parseCmdLine(3,p3,parseCallback,argStruc);
     printf("OPCIONES:%d\n clave:%s valor:%s\n",cantidad,argStruc[0].key,argStruc[0].value);
-    printf("\n\n");
+    printf("\n");
     
     //TEST 4:1 opcion y un parametro
     printf("TEST 4: 1 opcion y 1 parametro\n");
     printf("Linea de comandos: %s  %s  %s  %s \n",p4[0],p4[1],p4[2],p4[3]);
     cantidad=parseCmdLine(4,p4,parseCallback,argStruc);
-    printf("OPCIONES:%d\n clave:%s valor:%s\n",cantidad-1,argStruc[0].key,argStruc[0].value);
-    printf("PARAMETRO:%s\n",argStruc[1].value);
-    printf("\n\n");
+    printf("OPCIONES:%d\n clave:%s valor:%s\n",cantidad-1,argStruc[1].key,argStruc[1].value);
+    printf("PARAMETRO:%s\n",argStruc[0].value);
+    printf("\n");
     
     //TEST 5:2 opciones
     printf("TEST 5:2 opciones\n");
     printf("Linea de comandos: %s  %s  %s  %s  %s\n",p5[0],p5[1],p5[2],p5[3],p5[4]);
     cantidad=parseCmdLine(5,p5,parseCallback,argStruc);
     printf("OPCIONES:%d\n clave1:%s valor1:%s\n clave2:%s valor2:%s\n",cantidad,argStruc[0].key,argStruc[0].value,argStruc[1].key,argStruc[1].value);
-    printf("\n\n");
+    printf("\n");
     
     //TEST 6:1 opcion con error de contenido
     printf("TEST 6:1 opcion con error de contenido\n");
     printf("Linea de comandos: %s  %s  %s\n",p6[0],p6[1],p6[2]);
     cantidad=parseCmdLine(3,p6,parseCallback,argStruc);
-    printf("\n\n");
+    printf("\n");
     
+    
+
     return (EXIT_SUCCESS);
 }
 
@@ -88,7 +90,7 @@ main(int argc, char* argv [])
 /// @privatesection
 // === Local function definitions ===
 
-int parseCallback(char* key, char* value, void* userData)   //Toma una key con su value y lo guarda en memoria.
+int parseCallback(char* key, char* value, void* userData)   //Toma un key con su value y lo guarda en memoria.
 {
 
     args_t* argStruc = (args_t*)userData;            //Castea la struc donde debe guardar.
@@ -96,7 +98,7 @@ int parseCallback(char* key, char* value, void* userData)   //Toma una key con s
 
     if (key == NULL) {                               //Si fue parametro lo guarda.
 
-        argStruc->key = value;
+        argStruc->value = value;
     }
 
     else {                                           //Si fue opcion, verifica que sea la clave correcta.

@@ -3,9 +3,11 @@
 // === Libraries and header files ===
 #include <stdio.h>
 #include <stdlib.h>
+
+// This file
 #include "callib.h"
 
-/// @privatesectionhh
+/// @privatesection
 // === Constants and Macro definitions ===
 
 // === Enumerations, structures and typedefs ===
@@ -33,13 +35,13 @@ parseCmdLine(int argc, char *argv[],pCallback (p), void *userData)
     {
         if((*(argv[i]) == '-')&&(*((argv[i])+1)== '\0'))        //Error de tipo 2.
         {   
-            printf("ERROR TIPO 2:opcion sin clave\n");           //Encontro opcion con clave vac�a.
+            printf("ERROR TIPO 2:opcion sin clave\n");           //Encontro opcion con clave vacia.
             result=-EXIT_FAILURE;
             i=argc;
         }
         else if((*(argv[i]) == '-')&&( argv[i+1] == NULL))      //Error de tipo 1.
         {    
-             printf("ERROR TIPO 1:opcion sin valor\n");          //Encontro opcion sin valor.
+             printf("ERROR TIPO 1:opcion sin valor\n");             //Encontro opcion sin valor.
             result=-EXIT_FAILURE;
             i=argc;
         }
